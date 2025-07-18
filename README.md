@@ -4,7 +4,7 @@
 [![Build Status](https://github.com/kapong/controlnet_dwpose/workflows/Test%20Package/badge.svg)](https://github.com/kapong/controlnet_dwpose/actions)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/kapong/588227d8209143975bfc09da90c08f12/dwpose.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/gist/kapong/38fc41f2ca2b2f0fba131d96183a11e4/dwpose.ipynb)
 
 A standalone Python library for whole-body pose estimation extracted from the [ControlNeXt](https://github.com/dvlab-research/ControlNeXt) project.
 
