@@ -1,7 +1,22 @@
 from setuptools import setup, find_packages
+import os
 
-with open("requirement.txt", "r", encoding="utf-8") as fh:
-    requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+# Read requirements file if it exists
+requirements = []
+if os.path.exists("requirement.txt"):
+    with open("requirement.txt", "r", encoding="utf-8") as fh:
+        requirements = [line.strip() for line in fh if line.strip() and not line.startswith("#")]
+else:
+    # Fallback to hardcoded requirements
+    requirements = [
+        "numpy",
+        "opencv-python",
+        "onnxruntime-gpu",
+        "torch",
+        "matplotlib",
+        "decord",
+        "tqdm",
+    ]
 
 setup(
     name="controlnet_dwpose",
