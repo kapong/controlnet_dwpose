@@ -89,11 +89,16 @@ detector.release_memory()
 
 ```python
 from controlnet_dwpose.preprocess import get_image_pose
-import controlnet_dwpose.util as util
+from controlnet_dwpose import set_thickness_multiplier, get_thickness_multiplier
 
-# Configure visualization thickness (default is 3)
+# Method 1: Using the new API functions (recommended)
+current_thickness = get_thickness_multiplier()  # Get current value (default: 3)
+set_thickness_multiplier(2)  # Set thinner lines
+# set_thickness_multiplier(5)  # Or set thicker lines
+
+# Method 2: Direct access (legacy)
+import controlnet_dwpose.util as util
 util.thickness_mul = 2  # Thinner lines
-# util.thickness_mul = 5  # Thicker lines
 
 # Get pose visualization
 pose_image = get_image_pose(detector, image)
@@ -112,10 +117,10 @@ plt.show()
 
 ```python
 from controlnet_dwpose.preprocess import get_video_pose
-import controlnet_dwpose.util as util
+from controlnet_dwpose import set_thickness_multiplier
 
 # Configure thickness for video processing
-util.thickness_mul = 2
+set_thickness_multiplier(2)
 
 # Process video with pose rescaling
 pose_sequence = get_video_pose(
@@ -130,10 +135,10 @@ pose_sequence = get_video_pose(
 
 ```python
 from controlnet_dwpose.util import draw_pose
-import controlnet_dwpose.util as util
+from controlnet_dwpose import set_thickness_multiplier
 
 # Set custom thickness
-util.thickness_mul = 4
+set_thickness_multiplier(4)
 
 # Get pose data
 pose_result = detector(image)
@@ -144,6 +149,47 @@ pose_canvas = draw_pose(pose_result, height, width)
 
 # Convert to displayable format
 pose_image = pose_canvas.transpose(1, 2, 0)  # CHW to HWC
+```
+
+## Thickness Configuration
+
+The library provides configurable thickness for pose visualization through dedicated API functions:
+
+### API Functions
+
+```python
+from controlnet_dwpose import set_thickness_multiplier, get_thickness_multiplier
+
+# Get current thickness multiplier (default: 3)
+current_thickness = get_thickness_multiplier()
+print(f"Current thickness: {current_thickness}")
+
+# Set new thickness multiplier
+set_thickness_multiplier(2)    # Thinner lines
+set_thickness_multiplier(5)    # Thicker lines
+set_thickness_multiplier(1.5)  # Fine control with float values
+
+# Verify the change
+new_thickness = get_thickness_multiplier()
+print(f"New thickness: {new_thickness}")
+```
+
+### Effects on Visualization
+
+The thickness multiplier affects:
+- **Body pose lines**: Line width = 4 × thickness_multiplier
+- **Body keypoints**: Circle radius = 4 × thickness_multiplier  
+- **Hand pose lines**: Line width = 2 × thickness_multiplier
+- **Hand keypoints**: Circle radius = 4 × thickness_multiplier
+- **Face keypoints**: Circle radius = 3 × thickness_multiplier
+
+### Legacy Access
+
+For backward compatibility, direct access is still supported:
+
+```python
+import controlnet_dwpose.util as util
+util.thickness_mul = 2  # Direct assignment
 ```
 
 ## Model Requirements
