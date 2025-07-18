@@ -19,7 +19,7 @@ class DWposeDetector:
                     such as https://huggingface.co/yzd-v/DWPose/blob/main/dw-ll_ucoco_384.onnx
         device: (str) 'cpu' or 'cuda:{device_id}'
     """
-    def __init__(self, model_det, model_pose, device='cpu'):
+    def __init__(self, model_det, model_pose, device=device):
         self.args = model_det, model_pose, device
 
     def release_memory(self):
@@ -65,8 +65,3 @@ class DWposeDetector:
             pose = dict(bodies=bodies, hands=hands, hands_score=hands_score, faces=faces, faces_score=faces_score)
 
             return pose
-
-dwpose_detector = DWposeDetector(
-    model_det="pretrained/DWPose/yolox_l.onnx",
-    model_pose="pretrained/DWPose/dw-ll_ucoco_384.onnx",
-    device=device)

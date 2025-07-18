@@ -2,11 +2,11 @@ from tqdm import tqdm
 import decord
 import numpy as np
 
+from .dwpose_detector import DWposeDetector
 from .util import draw_pose
-from .dwpose_detector import dwpose_detector as dwprocessor
-
 
 def get_video_pose(
+        dwprocessor: DWposeDetector,
         video_path: str, 
         ref_image: np.ndarray, 
         max_frame_num = None,
@@ -63,7 +63,7 @@ def get_video_pose(
     return np.stack(output_pose)
 
 
-def get_image_pose(ref_image):
+def get_image_pose(dwprocessor: DWposeDetector, ref_image):
     """process image pose
 
     Args:

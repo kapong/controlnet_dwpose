@@ -2,6 +2,8 @@
 
 A standalone Python library for whole-body pose estimation extracted from the [ControlNeXt](https://github.com/dvlab-research/ControlNeXt) project.
 
+> **Note**: This is a modified version of the DWPose implementation from the original ControlNeXt repository. The code has been restructured for standalone use and includes API improvements for better usability.
+
 ## Overview
 
 DWPose provides dense keypoint detection for body, hands, and face using ONNX Runtime. It supports both CPU and GPU inference and is designed for efficient pose estimation in images and videos.
@@ -45,13 +47,13 @@ from dwpose import DWposeDetector
 
 # Initialize detector
 detector = DWposeDetector(
-    model_det="path/to/yolox_l.onnx",
-    model_pose="path/to/dw-ll_ucoco_384.onnx",
+    model_det="yolox_l.onnx",
+    model_pose="dw-ll_ucoco_384.onnx",
     device='cpu'  # or 'cuda'
 )
 
 # Load image
-image = cv2.imread('your_image.jpg')
+image = cv2.imread('example/02.jpeg')
 image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
 # Detect poses
@@ -72,7 +74,7 @@ detector.release_memory()
 from dwpose.preprocess import get_image_pose
 
 # Get pose visualization
-pose_image = get_image_pose(image)
+pose_image = get_image_pose(detector, image)
 ```
 
 ### Processing Videos
@@ -82,6 +84,7 @@ from dwpose.preprocess import get_video_pose
 
 # Process video with pose rescaling
 pose_sequence = get_video_pose(
+    dwprocessor=detector,
     video_path="path/to/video.mp4",
     ref_image=reference_image,
     sample_stride=1
@@ -95,7 +98,29 @@ You need to download the ONNX models:
 1. **Detection model**: `yolox_l.onnx` - YOLOX-L for human detection
 2. **Pose model**: `dw-ll_ucoco_384.onnx` - DWPose for keypoint estimation
 
-Place these models in your preferred directory and update the paths in your code.
+### Download Models
+
+Install gdown for downloading from Google Drive:
+```bash
+pip install gdown
+```
+
+Download the required models:
+```python
+import gdown
+
+# Download pose estimation model
+gdown.download('https://drive.google.com/uc?id=12L8E2oAgZy4VACGSK9RaZBZrfgx7VTA2', 'dw-ll_ucoco_384.onnx', quiet=False)
+
+# Download detection model  
+gdown.download('https://drive.google.com/uc?id=1w9pXC8tT0p9ndMN-CArp1__b2GbzewWI', 'yolox_l.onnx', quiet=False)
+```
+
+Or from command line:
+```bash
+gdown 'https://drive.google.com/uc?id=12L8E2oAgZy4VACGSK9RaZBZrfgx7VTA2' -O dw-ll_ucoco_384.onnx
+gdown 'https://drive.google.com/uc?id=1w9pXC8tT0p9ndMN-CArp1__b2GbzewWI' -O yolox_l.onnx
+```
 
 ## Output Format
 
@@ -123,13 +148,32 @@ Coordinates are normalized (0-1) relative to image dimensions.
 
 This code is extracted and packaged from the ControlNeXt project:
 
-- **Original Repository**: [dvlab-research/ControlNeXt](https://github.com/dvlab-research/ControlNeXt)
+- **ControlNeXt Repository**: [dvlab-research/ControlNeXt](https://github.com/dvlab-research/ControlNeXt)
 - **Source Directory**: [ControlNeXt-SVD-v2/dwpose](https://github.com/dvlab-research/ControlNeXt/tree/main/ControlNeXt-SVD-v2/dwpose)
-- **Authors**: Bohao Peng, Jian Wang, Yuechen Zhang, Wenbo Li, Ming-Chang Yang, Jiaya Jia
+- **ControlNeXt Authors**: Bohao Peng, Jian Wang, Yuechen Zhang, Wenbo Li, Ming-Chang Yang, Jiaya Jia
+
+### Original DWPose
+
+The DWPose implementation used by Peng et al. in ControlNeXt is based on the original DWPose research:
+
+- **Original DWPose Repository**: [IDEA-Research/DWPose](https://github.com/IDEA-Research/DWPose)
+- **Original DWPose Authors**: Zhendong Yang, Ailing Zeng, Chun Yuan, Yu Li
+- **Paper**: "Effective Whole-body Pose Estimation with Two-stages Distillation" (ICCV 2023)
+
+### Modifications
+
+This repository contains the following modifications from the original ControlNeXt implementation:
+
+- **Standalone packaging**: Restructured as an independent Python package with proper setup.py
+- **API improvements**: Enhanced function signatures for better usability
+- **Documentation**: Added comprehensive README, examples, and installation instructions
+- **Dependency management**: Proper requirements.txt and package dependencies
+- **Model download**: Integrated Google Drive download links for pre-trained models
+- **Memory management**: Improved memory cleanup and resource handling
 
 ### Citation
 
-If you use this code, please cite the original ControlNeXt paper:
+If you use this code, please cite both the ControlNeXt paper and the original DWPose paper:
 
 ```bibtex
 @article{peng2024controlnext,
@@ -137,6 +181,14 @@ If you use this code, please cite the original ControlNeXt paper:
   author={Peng, Bohao and Wang, Jian and Zhang, Yuechen and Li, Wenbo and Yang, Ming-Chang and Jia, Jiaya},
   journal={arXiv preprint arXiv:2408.06070},
   year={2024}
+}
+
+@inproceedings{yang2023effective,
+  title={Effective Whole-body Pose Estimation with Two-stages Distillation},
+  author={Yang, Zhendong and Zeng, Ailing and Yuan, Chun and Li, Yu},
+  booktitle={Proceedings of the IEEE/CVF International Conference on Computer Vision},
+  pages={4210--4219},
+  year={2023}
 }
 ```
 
