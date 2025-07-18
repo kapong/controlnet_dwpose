@@ -7,6 +7,23 @@ import cv2
 eps = 0.01
 thickness_mul = 3
 
+def set_thickness_multiplier(value):
+    """Set the thickness multiplier for drawing poses
+    
+    Args:
+        value (float): The thickness multiplier value
+    """
+    global thickness_mul
+    thickness_mul = value
+
+def get_thickness_multiplier():
+    """Get the current thickness multiplier
+    
+    Returns:
+        float: The current thickness multiplier value
+    """
+    return thickness_mul
+
 def alpha_blend_color(color, alpha):
     """blend color according to point conf
     """
