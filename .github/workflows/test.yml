@@ -34,13 +34,13 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 dwpose/ --count --select=E9,F63,F7,F82 --show-source --statistics
+        flake8 controlnet_dwpose/ --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 dwpose/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        flake8 controlnet_dwpose/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
         
     - name: Check code formatting with black
       run: |
-        black --check --diff dwpose/ setup.py || echo "Black formatting check completed"
+        black --check --diff controlnet_dwpose/ setup.py || echo "Black formatting check completed"
         
     - name: Install package
       run: |
@@ -48,6 +48,6 @@ jobs:
         
     - name: Test imports
       run: |
-        python -c "import dwpose; print('Import successful')"
-        python -c "from dwpose import DWposeDetector; print('DWposeDetector import successful')"
-        python -c "from dwpose import get_image_pose, get_video_pose; print('Preprocessing functions import successful')"
+        python -c "import controlnet_dwpose; print('Import successful')"
+        python -c "from controlnet_dwpose import DWposeDetector; print('DWposeDetector import successful')"
+        python -c "from controlnet_dwpose import get_image_pose, get_video_pose; print('Preprocessing functions import successful')"
