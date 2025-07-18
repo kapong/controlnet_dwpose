@@ -23,7 +23,7 @@ pip install dwpose
 
 ### From source
 ```bash
-git clone https://github.com/your-username/dwpose.git
+git clone https://github.com/kapong/dwpose.git
 cd dwpose
 pip install -e .
 ```
