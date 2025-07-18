@@ -31,13 +31,13 @@ DWPose provides dense keypoint detection for body, hands, and face using ONNX Ru
 
 ### From PyPI (when available)
 ```bash
-pip install dwpose
+pip install controlnet_dwpose
 ```
 
 ### From source
 ```bash
-git clone https://github.com/kapong/dwpose.git
-cd dwpose
+git clone https://github.com/kapong/controlnet_dwpose.git
+cd controlnet_dwpose
 pip install -e .
 ```
 
