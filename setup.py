@@ -23,6 +23,9 @@ setup(
     version="0.1.1",
     author="P.Phienphanich",
     author_email="garpong@gmail.com",
+    description="DWPose component from ControlNeXt for whole-body pose estimation",
+    long_description=open("README.md", "r", encoding="utf-8").read() if os.path.exists("README.md") else "DWPose is a whole-body pose estimation library extracted and packaged from ControlNeXt project by Peng et al.",
+    long_description_content_type="text/markdown",
     url="https://github.com/kapong/controlnet_dwpose",
     packages=find_packages(),
     classifiers=[
