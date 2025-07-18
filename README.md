@@ -60,7 +60,7 @@ pip install -r requirement.txt
 ```python
 import cv2
 import numpy as np
-from dwpose import DWposeDetector
+from controlnet_dwpose import DWposeDetector
 
 # Initialize detector
 detector = DWposeDetector(
@@ -85,19 +85,37 @@ faces = pose_result['faces']
 detector.release_memory()
 ```
 
-### Processing Images
+### Processing Images with Customizable Thickness
 
 ```python
-from dwpose.preprocess import get_image_pose
+from controlnet_dwpose.preprocess import get_image_pose
+import controlnet_dwpose.util as util
+
+# Configure visualization thickness (default is 3)
+util.thickness_mul = 2  # Thinner lines
+# util.thickness_mul = 5  # Thicker lines
 
 # Get pose visualization
 pose_image = get_image_pose(detector, image)
+
+# Convert from CHW to HWC format for display
+pose_image = pose_image.transpose(1, 2, 0)
+
+# Display or save
+import matplotlib.pyplot as plt
+plt.imshow(pose_image)
+plt.axis('off')
+plt.show()
 ```
 
 ### Processing Videos
 
 ```python
-from dwpose.preprocess import get_video_pose
+from controlnet_dwpose.preprocess import get_video_pose
+import controlnet_dwpose.util as util
+
+# Configure thickness for video processing
+util.thickness_mul = 2
 
 # Process video with pose rescaling
 pose_sequence = get_video_pose(
@@ -106,6 +124,26 @@ pose_sequence = get_video_pose(
     ref_image=reference_image,
     sample_stride=1
 )
+```
+
+### Advanced Usage with Custom Visualization
+
+```python
+from controlnet_dwpose.util import draw_pose
+import controlnet_dwpose.util as util
+
+# Set custom thickness
+util.thickness_mul = 4
+
+# Get pose data
+pose_result = detector(image)
+height, width = image.shape[:2]
+
+# Create custom visualization
+pose_canvas = draw_pose(pose_result, height, width)
+
+# Convert to displayable format
+pose_image = pose_canvas.transpose(1, 2, 0)  # CHW to HWC
 ```
 
 ## Model Requirements

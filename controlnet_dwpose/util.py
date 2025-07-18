@@ -1,10 +1,11 @@
+
 import math
 import numpy as np
 import matplotlib
 import cv2
 
-
 eps = 0.01
+thickness_mul = 3
 
 def alpha_blend_color(color, alpha):
     """blend color according to point conf
@@ -16,7 +17,7 @@ def draw_bodypose(canvas, candidate, subset, score):
     candidate = np.array(candidate)
     subset = np.array(subset)
 
-    stickwidth = 4
+    stickwidth = 4 * thickness_mul
 
     limbSeq = [[2, 3], [2, 6], [3, 4], [4, 5], [6, 7], [7, 8], [2, 9], [9, 10], \
                [10, 11], [2, 12], [12, 13], [13, 14], [2, 1], [1, 15], [15, 17], \
@@ -52,11 +53,11 @@ def draw_bodypose(canvas, candidate, subset, score):
             conf = score[n][i]
             x = int(x * W)
             y = int(y * H)
-            cv2.circle(canvas, (int(x), int(y)), 4, alpha_blend_color(colors[i], conf), thickness=-1)
+            cv2.circle(canvas, (int(x), int(y)), 4*thickness_mul, alpha_blend_color(colors[i], conf), thickness=-1)
 
     return canvas
 
-def draw_handpose(canvas, all_hand_peaks, all_hand_scores):
+def draw_handpose(canvas, all_hand_peaks, all_hand_scores, force_hand_score=False):
     H, W, C = canvas.shape
 
     edges = [[0, 1], [1, 2], [2, 3], [3, 4], [0, 5], [5, 6], [6, 7], [7, 8], [0, 9], [9, 10], \
@@ -73,16 +74,16 @@ def draw_handpose(canvas, all_hand_peaks, all_hand_scores):
             y2 = int(y2 * H)
             score = int(scores[e[0]] * scores[e[1]] * 255)
             if x1 > eps and y1 > eps and x2 > eps and y2 > eps:
-                cv2.line(canvas, (x1, y1), (x2, y2), 
-                         matplotlib.colors.hsv_to_rgb([ie / float(len(edges)), 1.0, 1.0]) * score, thickness=2)
+                cv2.line(canvas, (x1, y1), (x2, y2),
+                         matplotlib.colors.hsv_to_rgb([ie / float(len(edges)), 1.0, 1.0]) * score, thickness=2*thickness_mul)
 
         for i, keyponit in enumerate(peaks):
             x, y = keyponit
             x = int(x * W)
             y = int(y * H)
-            score = int(scores[i] * 255)
+            score = int(255) if force_hand_score else int(scores[i] * 255)
             if x > eps and y > eps:
-                cv2.circle(canvas, (x, y), 4, (0, 0, score), thickness=-1)
+                cv2.circle(canvas, (x, y), 4*thickness_mul, (0, 0, score), thickness=-1)
     return canvas
 
 def draw_facepose(canvas, all_lmks, all_scores):
@@ -94,7 +95,7 @@ def draw_facepose(canvas, all_lmks, all_scores):
             y = int(y * H)
             conf = int(score * 255)
             if x > eps and y > eps:
-                cv2.circle(canvas, (x, y), 3, (conf, conf, conf), thickness=-1)
+                cv2.circle(canvas, (x, y), 3*thickness_mul, (conf, conf, conf), thickness=-1)
     return canvas
 
 def draw_pose(pose, H, W, ref_w=2160):
