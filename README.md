@@ -4,6 +4,17 @@ A standalone Python library for whole-body pose estimation extracted from the [C
 
 > **Note**: This is a modified version of the DWPose implementation from the original ControlNeXt repository. The code has been restructured for standalone use and includes API improvements for better usability.
 
+## ⚠️ AI Generation Disclaimer
+
+This repository's packaging, documentation, and API improvements were generated with assistance from Claude AI. While the core DWPose algorithms remain unchanged from the original research implementations, the following components were created using AI assistance:
+
+- Repository structure and packaging (setup.py, requirements.txt)
+- Documentation (README.md, CLAUDE.md)
+- API improvements and code organization
+- Installation and usage examples
+
+The original DWPose research and implementation credit belongs to the respective authors (Yang et al. and Peng et al.). This packaging is provided for educational and research purposes.
+
 ## Overview
 
 DWPose provides dense keypoint detection for body, hands, and face using ONNX Runtime. It supports both CPU and GPU inference and is designed for efficient pose estimation in images and videos.
