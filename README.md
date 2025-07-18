@@ -89,16 +89,10 @@ detector.release_memory()
 
 ```python
 from controlnet_dwpose.preprocess import get_image_pose
-from controlnet_dwpose import set_thickness_multiplier, get_thickness_multiplier
+from controlnet_dwpose import set_thickness_multiplier
 
-# Method 1: Using the new API functions (recommended)
-current_thickness = get_thickness_multiplier()  # Get current value (default: 3)
 set_thickness_multiplier(2)  # Set thinner lines
 # set_thickness_multiplier(5)  # Or set thicker lines
-
-# Method 2: Direct access (legacy)
-import controlnet_dwpose.util as util
-util.thickness_mul = 2  # Thinner lines
 
 # Get pose visualization
 pose_image = get_image_pose(detector, image)
