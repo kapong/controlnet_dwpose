@@ -1,5 +1,10 @@
 # DWPose
 
+[![PyPI version](https://badge.fury.io/py/controlnet-dwpose.svg)](https://badge.fury.io/py/controlnet-dwpose)
+[![Build Status](https://github.com/kapong/controlnet_dwpose/workflows/Test%20Package/badge.svg)](https://github.com/kapong/controlnet_dwpose/actions)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 A standalone Python library for whole-body pose estimation extracted from the [ControlNeXt](https://github.com/dvlab-research/ControlNeXt) project.
 
 > **Note**: This is a modified version of the DWPose implementation from the original ControlNeXt repository. The code has been restructured for standalone use and includes API improvements for better usability.

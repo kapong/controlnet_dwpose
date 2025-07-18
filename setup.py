@@ -23,9 +23,6 @@ setup(
     version="0.1.0",
     author="P.Phienphanich",
     author_email="garpong@gmail.com",
-    description="DWPose component from ControlNeXt for whole-body pose estimation",
-    long_description="DWPose is a whole-body pose estimation library extracted and packaged from ControlNeXt project by Peng et al. It provides dense keypoint detection for body, hands, and face using ONNX Runtime. The original DWPose method was developed by Yang et al. (ICCV 2023) and later adapted by Peng et al. for the ControlNeXt controllable generation framework. This package provides a standalone implementation with improved API and documentation.",
-    long_description_content_type="text/plain",
     url="https://github.com/kapong/controlnet_dwpose",
     packages=find_packages(),
     classifiers=[
