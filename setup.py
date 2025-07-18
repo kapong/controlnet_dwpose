@@ -20,7 +20,7 @@ else:
 
 setup(
     name="controlnet_dwpose",
-    version="0.1.0",
+    version="0.1.1",
     author="P.Phienphanich",
     author_email="garpong@gmail.com",
     url="https://github.com/kapong/controlnet_dwpose",

@@ -10,7 +10,7 @@ from .wholebody import Wholebody
 from .preprocess import get_image_pose, get_video_pose
 from .util import draw_pose, draw_bodypose, draw_handpose, draw_facepose
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 __author__ = "Bohao Peng, Jian Wang, Yuechen Zhang, Wenbo Li, Ming-Chang Yang, Jiaya Jia"
 __email__ = ""
 __license__ = "Apache-2.0"
