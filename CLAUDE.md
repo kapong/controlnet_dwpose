@@ -62,4 +62,3 @@ Install dependencies with: `pip install -r requirement.txt`
 This code is extracted from the ControlNeXt project by dvlab-research:
 - Original repository: https://github.com/dvlab-research/ControlNeXt
 - Specific source: https://github.com/dvlab-research/ControlNeXt/tree/main/ControlNeXt-SVD-v2/dwpose
-- Authors: Bohao Peng, Jian Wang, Yuechen Zhang, Wenbo Li, Ming-Chang Yang, Jiaya Jia
