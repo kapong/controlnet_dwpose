@@ -20,7 +20,7 @@ else:
 
 setup(
     name="controlnet_dwpose",
-    version="0.1.4",
+    version="0.1.5",
     author="P.Phienphanich",
     author_email="garpong@gmail.com",
     description="DWPose component from ControlNeXt for whole-body pose estimation",
