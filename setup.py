@@ -11,7 +11,7 @@ else:
     requirements = [
         "numpy",
         "opencv-python",
-        "onnxruntime-gpu",
+        "onnxruntime",
         "torch",
         "matplotlib",
         "decord",
